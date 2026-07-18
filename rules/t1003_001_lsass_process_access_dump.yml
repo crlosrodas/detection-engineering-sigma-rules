@@ -12,6 +12,7 @@ references:
     - https://github.com/OTRF/Security-Datasets
 author: Carlos Rodas
 date: 2026-07-17
+modified: 2026-07-17
 tags:
     - attack.credential-access
     - attack.t1003.001
@@ -28,11 +29,24 @@ detection:
             - '0x1010'
             - '0x1410'
             - '0x143A'
-    condition: selection
+    filter_main_azure_guest_agent:
+        # Azure VM guest agent diagnostics collector; lives under a versioned
+        # C:\WindowsAzure\GuestAgent_*\ path, so key on the basename only.
+        SourceImage|endswith: '\CollectGuestLogs.exe'
+    filter_main_windows_internals:
+        # Windows internals opening lsass during normal operation. Anchored to
+        # the System32 path (not a bare basename) so a payload named csrss.exe
+        # in another directory is NOT excluded. Matching is case-insensitive.
+        SourceImage|endswith:
+            - ':\Windows\System32\wininit.exe'
+            - ':\Windows\System32\csrss.exe'
+    condition: selection and not 1 of filter_main_*
 falsepositives:
-    - Endpoint protection, EDR and antivirus agents, and some backup/monitoring products, that
+    - Azure VM guest agent 'CollectGuestLogs.exe' opening lsass with GrantedAccess 0x1410 during
+      benign log collection (observed in testing; now filtered in the rule).
+    - Windows internals 'wininit.exe' and 'csrss.exe' (System32) opening lsass with 0x1fffff during
+      normal operation (observed in testing; now filtered in the rule).
+    - Endpoint protection, EDR/antivirus agents, and some backup/monitoring products that
       legitimately open lsass with high-rights handles; baseline the expected SourceImage set and
-      filter those trusted processes.
-    - Windows internal components (e.g. wininit.exe, csrss.exe) accessing lsass during normal
-      operation.
+      add them to the filter as needed.
 level: high

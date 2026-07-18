@@ -10,3 +10,15 @@
 2026-07-17 21:41:47 INFO     [+] Creating indexes
 2026-07-17 21:41:47 INFO     [+] Total events processed: [magenta]40,569[/]
 2026-07-17 21:41:47 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link] - [yellow]1[/] rules
+2026-07-17 22:09:12 INFO     [+] Loading ruleset(s)
+2026-07-17 22:09:12 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml[/][/link]
+2026-07-17 22:09:12 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 22:09:12 INFO     [+] 1 rules loaded
+2026-07-17 22:09:12 INFO     [+] Checking prerequisites
+2026-07-17 22:09:12 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 22:09:12 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link]
+2026-07-17 22:09:12 INFO     [+] Processing events (streaming mode)
+2026-07-17 22:09:12 INFO     [+] Creating dynamic model
+2026-07-17 22:09:17 INFO     [+] Creating indexes
+2026-07-17 22:09:17 INFO     [+] Total events processed: [magenta]40,569[/]
+2026-07-17 22:09:17 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link] - [yellow]1[/] rules

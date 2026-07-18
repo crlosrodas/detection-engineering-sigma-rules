@@ -10,3 +10,15 @@
 2026-07-17 21:41:41 INFO     [+] Creating indexes
 2026-07-17 21:41:41 INFO     [+] Total events processed: [magenta]5,898[/]
 2026-07-17 21:41:41 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json][cyan]empire_psinject_PEinjection_2020-08-07143205.json[/][/link] - [yellow]1[/] rules
+2026-07-17 22:09:10 INFO     [+] Loading ruleset(s)
+2026-07-17 22:09:10 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml[/][/link]
+2026-07-17 22:09:10 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 22:09:10 INFO     [+] 1 rules loaded
+2026-07-17 22:09:10 INFO     [+] Checking prerequisites
+2026-07-17 22:09:10 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 22:09:10 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json][cyan]empire_psinject_PEinjection_2020-08-07143205.json[/][/link]
+2026-07-17 22:09:10 INFO     [+] Processing events (streaming mode)
+2026-07-17 22:09:10 INFO     [+] Creating dynamic model
+2026-07-17 22:09:11 INFO     [+] Creating indexes
+2026-07-17 22:09:11 INFO     [+] Total events processed: [magenta]5,898[/]
+2026-07-17 22:09:11 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json][cyan]empire_psinject_PEinjection_2020-08-07143205.json[/][/link] - [yellow]1[/] rules

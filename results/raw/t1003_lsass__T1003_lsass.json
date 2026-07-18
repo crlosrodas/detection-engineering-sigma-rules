@@ -4,7 +4,7 @@
   "description": "Detects a process opening a handle to lsass.exe (Sysmon EID 10 ProcessAccess) with a\nGrantedAccess mask that grants the read/clone rights used to dump LSASS memory\n(e.g. PROCESS_VM_READ | PROCESS_QUERY_INFORMATION). Covers the well-known dump masks used by\ntools such as comsvcs.dll MiniDump, Mimikatz and ProcDump. GrantedAccess is compared\ncase-insensitively, so both upper- and lower-case hex representations are matched.\n",
   "sigmafile": "",
   "sigma": [
-    "SELECT * FROM logs WHERE EventID=10 AND (TargetImage LIKE '%\\\\lsass.exe' ESCAPE '\\' AND (GrantedAccess='0x1FFFFF' OR GrantedAccess='0x1F3FFF' OR GrantedAccess='0x1F1FFF' OR GrantedAccess='0x1010' OR GrantedAccess='0x1410' OR GrantedAccess='0x143A'))"
+    "SELECT * FROM logs WHERE EventID=10 AND ((TargetImage LIKE '%\\\\lsass.exe' ESCAPE '\\' AND (GrantedAccess='0x1FFFFF' OR GrantedAccess='0x1F3FFF' OR GrantedAccess='0x1F1FFF' OR GrantedAccess='0x1010' OR GrantedAccess='0x1410' OR GrantedAccess='0x143A')) AND (NOT (SourceImage LIKE '%\\\\CollectGuestLogs.exe' ESCAPE '\\' OR (SourceImage LIKE '%:\\\\Windows\\\\System32\\\\wininit.exe' ESCAPE '\\' OR SourceImage LIKE '%:\\\\Windows\\\\System32\\\\csrss.exe' ESCAPE '\\'))))"
   ],
   "rule_level": "high",
   "tags": [

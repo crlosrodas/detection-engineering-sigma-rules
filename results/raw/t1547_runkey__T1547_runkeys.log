@@ -10,3 +10,15 @@
 2026-07-17 21:42:21 INFO     [+] Creating indexes
 2026-07-17 21:42:21 INFO     [+] Total events processed: [magenta]40,569[/]
 2026-07-17 21:42:21 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link] - [yellow]1[/] rules
+2026-07-17 22:09:46 INFO     [+] Loading ruleset(s)
+2026-07-17 22:09:46 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1547_001_registry_run_key_suspicious_payload.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1547_001_registry_run_key_suspicious_payload.yml[/][/link]
+2026-07-17 22:09:46 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 22:09:46 INFO     [+] 1 rules loaded
+2026-07-17 22:09:46 INFO     [+] Checking prerequisites
+2026-07-17 22:09:46 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 22:09:46 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link]
+2026-07-17 22:09:46 INFO     [+] Processing events (streaming mode)
+2026-07-17 22:09:46 INFO     [+] Creating dynamic model
+2026-07-17 22:09:51 INFO     [+] Creating indexes
+2026-07-17 22:09:51 INFO     [+] Total events processed: [magenta]40,569[/]
+2026-07-17 22:09:51 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json][cyan]empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json[/][/link] - [yellow]1[/] rules
