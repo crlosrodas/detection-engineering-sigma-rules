@@ -21,6 +21,12 @@ logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_ke
 # --- Python virtual environment (pySigma validation tooling) ---
 .venv/
 
+# --- Project-local Zircolite clone (third-party code, not vendored) ---
+# Provisioned by tools/setup_zircolite.sh, pinned to tag v3.7.6. It is the
+# Zircolite engine that runs the test matrix; it is cloned on demand rather
+# than committed. Reproduce with: bash tools/setup_zircolite.sh
+tools/zircolite/
+
 # --- OS / editor cruft ---
 .DS_Store
 Thumbs.db

@@ -6,8 +6,9 @@ against the 5 sample logs in `../logs/` (a full 5x5 matrix, 25 cells).
 ## Tool chosen: Zircolite
 
 **[Zircolite](https://github.com/wagga40/Zircolite) v3.7.6** (git commit
-`b37b51e`), run from a local clone with its dependencies installed into the
-project `.venv`.
+`b37b51e`), run from a project-local clone at `../tools/zircolite/` provisioned
+by `../tools/setup_zircolite.sh` (pinned to tag `v3.7.6`), with its dependencies
+satisfied by the project `.venv`.
 
 ### Why Zircolite
 
@@ -28,18 +29,20 @@ project `.venv`.
 
 > Note: `pip install zircolite` does **not** work - Zircolite is not published
 > on PyPI as an installable package. It is distributed as a repo you clone and
-> run (`python3 zircolite.py ...`). We installed its `requirements.txt` into the
-> project `.venv` (adds `evtx`, `pysigma-backend-sqlite`,
-> `pysigma-pipeline-sysmon`, `pysigma-pipeline-windows`, `orjson`, `rich`, etc.)
-> and invoke `zircolite.py` from the clone at `/tmp/Zircolite`.
+> run (`python3 zircolite.py ...`). Its dependencies (`evtx`,
+> `pysigma-backend-sqlite`, `pysigma-pipeline-sysmon`,
+> `pysigma-pipeline-windows`, `orjson`, `rich`, etc.) are already covered by the
+> project `.venv`. The clone lives at `../tools/zircolite/`, pinned to tag
+> `v3.7.6` by `../tools/setup_zircolite.sh`, and `run_matrix.sh` invokes
+> `zircolite.py` from there.
 
 ### Reproduce
 
 ```bash
 source ../.venv/bin/activate
-# one-time: clone Zircolite and install its deps into the venv
-git clone --depth 1 https://github.com/wagga40/Zircolite.git /tmp/Zircolite
-pip install -r /tmp/Zircolite/requirements.txt
+# one-time: provision the pinned (v3.7.6) project-local Zircolite clone.
+# Clones into ../tools/zircolite/ and verifies the venv has its deps.
+bash ../tools/setup_zircolite.sh
 # run the full 5x5 matrix -> results/raw/<rule>__<log>.json
 bash run_matrix.sh
 ```

@@ -25,11 +25,12 @@
 # Inputs in logs/ are NEVER modified. JSON-lines OTRF logs use -j; the EVTX
 # uses Zircolite native auto-detection.
 #
-# Requires: the project .venv activated, and a Zircolite clone at $ZIRCO.
+# Requires: the project .venv activated, and the project-local Zircolite clone
+# provisioned by tools/setup_zircolite.sh (pinned to tag v3.7.6).
 set -euo pipefail
 
 PROJ="/home/carlos/projects/detection-engineering-sigma-rules"
-ZIRCO="/tmp/Zircolite"
+ZIRCO="$PROJ/tools/zircolite"
 OUT="$PROJ/results/raw"
 mkdir -p "$OUT"
 
