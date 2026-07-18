@@ -1,0 +1,46 @@
+title: PowerShell Web Download Cradle Via Script Block Logging
+id: 7344d6a1-f035-4997-9b19-40b13f8fddfd
+status: experimental
+description: |
+    Detects PowerShell download cradles in Script Block Logging (EID 4104) that combine a
+    network-download primitive (Net.WebClient / DownloadFile / DownloadString / Invoke-WebRequest)
+    with an execution or in-memory follow-on (Invoke-Item, Invoke-Expression/IEX, Start-Process,
+    or a TLS SecurityProtocol pin). This is a common first-stage malware pattern (e.g. Emotet
+    downloaders). Sigma string matching is case-insensitive by default, so heavily mixed-case /
+    concatenation-obfuscated variants are matched without enumerating every casing.
+references:
+    - https://raw.githubusercontent.com/sbousseaden/EVTX-ATTACK-SAMPLES/master/Other/emotet/exec_emotet_ps_4104.evtx
+    - https://github.com/sbousseaden/EVTX-ATTACK-SAMPLES
+author: Carlos Rodas
+date: 2026-07-17
+tags:
+    - attack.execution
+    - attack.t1059.001
+logsource:
+    product: windows
+    category: ps_script
+    definition: 'Requirements: Script Block Logging must be enabled (Module/ScriptBlock logging policy, EID 4104)'
+detection:
+    selection_download:
+        ScriptBlockText|contains:
+            - 'Net.WebClient'
+            - '.DownloadFile('
+            - '.DownloadString('
+            - '.DownloadData('
+            - 'Invoke-WebRequest'
+            - 'Start-BitsTransfer'
+    selection_followon:
+        ScriptBlockText|contains:
+            - 'Invoke-Item'
+            - 'Invoke-Expression'
+            - 'IEX '
+            - 'IEX('
+            - 'Start-Process'
+            - 'Net.ServicePointManager'
+            - 'FromBase64String'
+    condition: selection_download and selection_followon
+falsepositives:
+    - Software deployment, patching or configuration-management scripts that legitimately download
+      and then launch installers (e.g. package managers, CI runners, bootstrap scripts).
+    - Administrator one-liners that fetch and run tooling from a trusted internal repository.
+level: high

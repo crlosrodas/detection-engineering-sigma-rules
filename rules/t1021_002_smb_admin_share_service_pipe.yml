@@ -1,0 +1,38 @@
+title: Remote Service-Control Named Pipe Access Over SMB Admin Share
+id: 76911ca2-7102-4436-a989-24a22ca82d23
+status: experimental
+description: |
+    Detects network share object access (Security EID 5145) to a service-execution named pipe over
+    the IPC$ administrative share. Remote binds to RPC pipes such as svcctl (Service Control
+    Manager), atsvc (Task Scheduler) or psexecsvc are the hallmark of PsExec / SMBExec style
+    lateral movement, where an attacker remotely creates and starts a service on the target to run
+    code. Because the logsource is service:security, EventID 5145 is asserted explicitly in the
+    selection.
+references:
+    - https://raw.githubusercontent.com/OTRF/Security-Datasets/master/datasets/atomic/windows/lateral_movement/host/empire_smbexec_dcerpc_smb_svcctl.zip
+    - https://github.com/OTRF/Security-Datasets
+author: Carlos Rodas
+date: 2026-07-17
+tags:
+    - attack.lateral-movement
+    - attack.t1021.002
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 5145
+        ShareName|endswith: 'IPC$'
+        RelativeTargetName:
+            - 'svcctl'
+            - 'atsvc'
+            - 'psexecsvc'
+            - 'paexec'
+            - 'remcomsvc'
+            - 'csexecsvc'
+    condition: selection
+falsepositives:
+    - Legitimate remote administration and monitoring tools that manage services or scheduled tasks
+      over RPC (e.g. patch management, SCCM, backup agents); baseline the expected source hosts and
+      service accounts.
+level: high

@@ -6,6 +6,9 @@
 logs/T1059.001_powershell/exec_emotet_ps_4104.evtx
 *.evtx
 
+# --- Python virtual environment (pySigma validation tooling) ---
+.venv/
+
 # --- OS / editor cruft ---
 .DS_Store
 Thumbs.db

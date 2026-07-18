@@ -1,0 +1,39 @@
+title: Remote Thread Created By Scripting Or Office Process
+id: 85a24c04-0505-46df-bc94-1236cab8312e
+status: experimental
+description: |
+    Detects a script interpreter or Office application creating a remote thread in another process
+    (Sysmon EID 8 CreateRemoteThread). Interpreters such as powershell.exe/pwsh.exe, wscript,
+    cscript and mshta, and Office apps such as winword/excel, have no legitimate reason to inject
+    threads into other processes, so this is a strong process-injection signal (e.g. PowerShell
+    Empire reflectively injecting a PE and running it via CreateRemoteThread). The rule keys on the
+    source process and is deliberately target-agnostic rather than hardcoding a specific target.
+references:
+    - https://raw.githubusercontent.com/OTRF/Security-Datasets/master/datasets/atomic/windows/defense_evasion/host/empire_psinject_PEinjection.zip
+    - https://github.com/OTRF/Security-Datasets
+author: Carlos Rodas
+date: 2026-07-17
+tags:
+    - attack.defense-evasion
+    - attack.privilege-escalation
+    - attack.t1055
+logsource:
+    product: windows
+    category: create_remote_thread
+detection:
+    selection:
+        SourceImage|endswith:
+            - '\powershell.exe'
+            - '\pwsh.exe'
+            - '\wscript.exe'
+            - '\cscript.exe'
+            - '\mshta.exe'
+            - '\winword.exe'
+            - '\excel.exe'
+            - '\powerpnt.exe'
+            - '\outlook.exe'
+    condition: selection
+falsepositives:
+    - Rare legitimate automation or management frameworks that use CreateRemoteThread from a
+      scripting host; baseline and filter the specific TargetImage/SourceImage pairs observed.
+level: high

@@ -1,0 +1,38 @@
+title: LSASS Process Access With Memory-Dump Access Mask
+id: e8bea732-94d9-42d1-9edd-fbf4d4f27873
+status: experimental
+description: |
+    Detects a process opening a handle to lsass.exe (Sysmon EID 10 ProcessAccess) with a
+    GrantedAccess mask that grants the read/clone rights used to dump LSASS memory
+    (e.g. PROCESS_VM_READ | PROCESS_QUERY_INFORMATION). Covers the well-known dump masks used by
+    tools such as comsvcs.dll MiniDump, Mimikatz and ProcDump. GrantedAccess is compared
+    case-insensitively, so both upper- and lower-case hex representations are matched.
+references:
+    - https://raw.githubusercontent.com/OTRF/Security-Datasets/master/datasets/atomic/windows/credential_access/host/psh_lsass_memory_dump_comsvcs.zip
+    - https://github.com/OTRF/Security-Datasets
+author: Carlos Rodas
+date: 2026-07-17
+tags:
+    - attack.credential-access
+    - attack.t1003.001
+logsource:
+    product: windows
+    category: process_access
+detection:
+    selection:
+        TargetImage|endswith: '\lsass.exe'
+        GrantedAccess:
+            - '0x1FFFFF'
+            - '0x1F3FFF'
+            - '0x1F1FFF'
+            - '0x1010'
+            - '0x1410'
+            - '0x143A'
+    condition: selection
+falsepositives:
+    - Endpoint protection, EDR and antivirus agents, and some backup/monitoring products, that
+      legitimately open lsass with high-rights handles; baseline the expected SourceImage set and
+      filter those trusted processes.
+    - Windows internal components (e.g. wininit.exe, csrss.exe) accessing lsass during normal
+      operation.
+level: high

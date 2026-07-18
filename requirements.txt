@@ -1,0 +1,7 @@
+# Detection-engineering Sigma project - validation tooling.
+# Install into a venv:  python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
+#
+# pySigma is the reference Sigma rule parser/validator. It is used here only to
+# load and schema-validate the rules under rules/ (see the validation step in
+# the project notes); no backend conversion plugins are needed for that.
+pysigma==1.4.0

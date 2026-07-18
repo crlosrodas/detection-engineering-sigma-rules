@@ -1,0 +1,49 @@
+title: Suspicious Command In Registry Run Key Value
+id: c5c5cc4c-8cfe-4f12-8cfc-74f814f16913
+status: experimental
+description: |
+    Detects a value written to a Run / RunOnce autostart registry key (Sysmon EID 13 registry set)
+    where the value data points at a script interpreter, a living-off-the-land binary, an encoded
+    command, or a user-writable staging path. This is a common userland persistence technique
+    (e.g. PowerShell Empire writing a logon autostart entry). The TargetObject contains match on
+    ...\CurrentVersion\Run also covers RunOnce and the Wow6432Node / HKLM equivalents.
+references:
+    - https://raw.githubusercontent.com/OTRF/Security-Datasets/master/datasets/atomic/windows/persistence/host/empire_persistence_registry_modification_run_keys_standard_user.zip
+    - https://github.com/OTRF/Security-Datasets
+author: Carlos Rodas
+date: 2026-07-17
+tags:
+    - attack.persistence
+    - attack.t1547.001
+logsource:
+    product: windows
+    category: registry_set
+detection:
+    selection_key:
+        TargetObject|contains: '\Software\Microsoft\Windows\CurrentVersion\Run'
+    selection_payload:
+        Details|contains:
+            - 'powershell'
+            - 'pwsh'
+            - 'cmd /c'
+            - 'cmd.exe /c'
+            - 'wscript'
+            - 'cscript'
+            - 'mshta'
+            - 'regsvr32'
+            - 'rundll32'
+            - '-enc'
+            - '-encodedcommand'
+            - 'FromBase64String'
+            - '-w hidden'
+            - '-windowstyle hidden'
+            - '\AppData\'
+            - '\Temp\'
+            - '\Users\Public\'
+            - '\ProgramData\'
+    condition: selection_key and selection_payload
+falsepositives:
+    - Legitimate application installers and updaters that register an autostart helper (some point
+      at ProgramData/AppData paths); baseline the known-good Run entries for the environment.
+    - Administrative logon scripts intentionally deployed via Run keys.
+level: medium
