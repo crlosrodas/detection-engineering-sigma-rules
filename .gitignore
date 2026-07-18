@@ -1,0 +1,12 @@
+# --- GPL-3.0 fetched samples (copyleft - never committed into this MIT repo) ---
+# These files are downloaded on demand by the fetch_sample.sh script in the
+# relevant technique folder. They exist locally for rule testing but are kept
+# out of git to avoid mixing GPL-3.0 content into Carlos's MIT-licensed repo.
+# See the corresponding logs/<technique>/SOURCE.md for the reasoning.
+logs/T1059.001_powershell/exec_emotet_ps_4104.evtx
+*.evtx
+
+# --- OS / editor cruft ---
+.DS_Store
+Thumbs.db
+*.swp
