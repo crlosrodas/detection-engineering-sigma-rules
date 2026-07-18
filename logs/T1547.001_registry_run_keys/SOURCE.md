@@ -1,11 +1,13 @@
 # SOURCE - T1547.001 Boot or Logon Autostart Execution: Registry Run Keys
 
 ## Sample file
-- **File:** `empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json` (vendored / committed)
-- **Note on size:** ~77 MB uncompressed. This is the full, unmodified upstream
-  dataset (40,569 events across several channels); only a couple of those
-  events are the Run-key write itself, the rest is ambient host telemetry from
-  the capture window. Kept whole to preserve provenance (not trimmed/altered).
+- **File:** `empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json` (fetched locally, not committed)
+- **Fetch with:** `./fetch_sample.sh` (run from this folder)
+- **Note on size:** ~80 MB (80,321,735 bytes) uncompressed. This is the full,
+  unmodified upstream dataset (40,569 events across several channels); only a
+  couple of those events are the Run-key write itself, the rest is ambient host
+  telemetry from the capture window. Kept whole to preserve provenance (not
+  trimmed/altered).
 
 ## Source
 - **Repo:** OTRF/Security-Datasets (formerly the Mordor project)
@@ -15,9 +17,15 @@
 
 ## License and vendored-vs-fetched decision
 - **License:** MIT (permissive).
-- **Decision:** VENDORED (downloaded, unzipped, and committed into this repo).
+- **Decision:** FETCHED, not vendored. The REASON is **repo size, not license.**
 - **Reasoning:** MIT is permissive and license-compatible with this repo, so
-  the sample can be redistributed directly with attribution.
+  vendoring (committing) this sample would have been perfectly fine on license
+  grounds. It is kept out of git purely because it is large (~80 MB uncompressed,
+  the biggest sample in the project) and would heavily bloat the history of every
+  clone. `fetch_sample.sh` downloads the identical upstream OTRF zip and extracts
+  the JSON, verifying it against a pinned sha256 (`9a781f7c...1b9725`) so the local
+  file is provably byte-for-byte the same bytes `results/` and `screenshots/` were
+  generated against. The extracted `.json` is listed in the repo `.gitignore`.
 
 ## What the log actually contains
 JSON, one event per line. Represents a PowerShell Empire agent establishing

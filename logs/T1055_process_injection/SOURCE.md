@@ -1,10 +1,11 @@
 # SOURCE - T1055 Process Injection
 
 ## Sample file
-- **File:** `empire_psinject_PEinjection_2020-08-07143205.json` (vendored / committed)
-- **Note on size:** ~40 MB uncompressed. Full, unmodified upstream dataset
-  (5,898 events; the large size is mostly verbose PowerShell Script Block
-  Logging message bodies). Kept whole to preserve provenance.
+- **File:** `empire_psinject_PEinjection_2020-08-07143205.json` (fetched locally, not committed)
+- **Fetch with:** `./fetch_sample.sh` (run from this folder)
+- **Note on size:** ~41 MB (41,664,401 bytes) uncompressed. Full, unmodified
+  upstream dataset (5,898 events; the large size is mostly verbose PowerShell
+  Script Block Logging message bodies). Kept whole to preserve provenance.
 
 ## Source
 - **Repo:** OTRF/Security-Datasets (formerly the Mordor project)
@@ -16,9 +17,15 @@
 
 ## License and vendored-vs-fetched decision
 - **License:** MIT (permissive).
-- **Decision:** VENDORED (downloaded, unzipped, and committed into this repo).
+- **Decision:** FETCHED, not vendored. The REASON is **repo size, not license.**
 - **Reasoning:** MIT is permissive and license-compatible with this repo, so
-  the sample can be redistributed directly with attribution.
+  vendoring (committing) this sample would have been perfectly fine on license
+  grounds. It is kept out of git purely because it is large (~41 MB uncompressed)
+  and would bloat the history of every clone. `fetch_sample.sh` downloads the
+  identical upstream OTRF zip and extracts the JSON, verifying it against a
+  pinned sha256 (`46a7b799...ddb122`) so the local file is provably byte-for-byte
+  the same bytes `results/` and `screenshots/` were generated against. The
+  extracted `.json` is listed in the repo `.gitignore`.
 
 ## What the log actually contains
 JSON, one event per line. Represents a PowerShell Empire agent reflectively

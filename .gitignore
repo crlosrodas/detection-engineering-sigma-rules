@@ -6,6 +6,18 @@
 logs/T1059.001_powershell/exec_emotet_ps_4104.evtx
 *.evtx
 
+# --- Large MIT fetched samples (excluded for REPO SIZE, not licensing) ---
+# These OTRF/Security-Datasets logs are MIT-licensed, so vendoring them would
+# be license-fine - they are kept out of git purely because they are large
+# (~20 MB / ~41 MB / ~80 MB) and would bloat the history of every clone. Each
+# is downloaded on demand by its technique folder's fetch_sample.sh, which
+# verifies the extracted file against a pinned sha256 so it is byte-identical
+# to what results/ and screenshots/ were built from. See the corresponding
+# logs/<technique>/SOURCE.md for the reasoning.
+logs/T1021.002_smb_admin_shares/empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json
+logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json
+logs/T1547.001_registry_run_keys/empire_persistence_registry_modification_run_keys_standard_user_2020-09-04030609.json
+
 # --- Python virtual environment (pySigma validation tooling) ---
 .venv/
 

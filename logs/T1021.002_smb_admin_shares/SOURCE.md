@@ -1,9 +1,10 @@
 # SOURCE - T1021.002 Remote Services: SMB/Windows Admin Shares
 
 ## Sample file
-- **File:** `empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json` (vendored / committed)
-- **Note on size:** ~20 MB uncompressed. Full, unmodified upstream dataset
-  (7,504 events). Kept whole to preserve provenance.
+- **File:** `empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json` (fetched locally, not committed)
+- **Fetch with:** `./fetch_sample.sh` (run from this folder)
+- **Note on size:** ~20 MB (20,686,465 bytes) uncompressed. Full, unmodified
+  upstream dataset (7,504 events). Kept whole to preserve provenance.
 
 ## Source
 - **Repo:** OTRF/Security-Datasets (formerly the Mordor project)
@@ -13,9 +14,15 @@
 
 ## License and vendored-vs-fetched decision
 - **License:** MIT (permissive).
-- **Decision:** VENDORED (downloaded, unzipped, and committed into this repo).
+- **Decision:** FETCHED, not vendored. The REASON is **repo size, not license.**
 - **Reasoning:** MIT is permissive and license-compatible with this repo, so
-  the sample can be redistributed directly with attribution.
+  vendoring (committing) this sample would have been perfectly fine on license
+  grounds. It is kept out of git purely because it is large (~20 MB uncompressed)
+  and would bloat the history of every clone. `fetch_sample.sh` downloads the
+  identical upstream OTRF zip and extracts the JSON, verifying it against a
+  pinned sha256 (`04411a61...b49ff7`) so the local file is provably byte-for-byte
+  the same bytes `results/` and `screenshots/` were generated against. The
+  extracted `.json` is listed in the repo `.gitignore`.
 
 ## What the log actually contains
 JSON, one event per line. Represents SMBExec-style lateral movement: an
