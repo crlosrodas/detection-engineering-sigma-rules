@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Remote Thread Created By Scripting Or Office Process</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Segoe UI', system-ui, sans-serif;
+         background:#0e1117; color:#e6edf3; padding:28px 32px; }
+  .brand { font-size:13px; letter-spacing:2px; color:#7d8590;
+            text-transform:uppercase; margin-bottom:4px; }
+  h1 { font-size:23px; margin:0 0 14px; color:#fff; }
+  .badges { margin-bottom:18px; }
+  .lvl { display:inline-block; padding:4px 12px; border-radius:5px;
+          font-weight:700; font-size:12px; letter-spacing:1px;
+          background:#b62324; color:#fff; margin-right:8px; }
+  .lvl.MEDIUM { background:#b5820b; }
+  .tag { display:inline-block; background:#21262d; color:#9db4d0;
+          padding:3px 9px; border-radius:4px; font-size:12px;
+          margin-right:6px; font-family:monospace; }
+  .summary { display:flex; gap:14px; margin-bottom:20px; flex-wrap:wrap; }
+  .stat { background:#161b22; border:1px solid #30363d; border-radius:8px;
+           padding:12px 18px; min-width:120px; }
+  .stat .n { font-size:26px; font-weight:700; color:#3fb950; }
+  .stat .l { font-size:11px; color:#7d8590; text-transform:uppercase;
+              letter-spacing:1px; margin-top:2px; }
+  .desc { background:#161b22; border-left:3px solid #388bfd;
+           padding:12px 16px; border-radius:0 6px 6px 0; margin-bottom:20px;
+           font-size:13px; color:#c9d1d9; line-height:1.5; max-width:1000px; }
+  .event { background:#161b22; border:1px solid #30363d; border-radius:8px;
+            margin-bottom:14px; overflow:hidden; }
+  .ev-hd { background:#1f6feb22; color:#79c0ff; padding:8px 14px;
+            font-size:13px; font-weight:600; border-bottom:1px solid #30363d; }
+  table.ev { width:100%; border-collapse:collapse; }
+  table.ev td { padding:7px 14px; border-bottom:1px solid #21262d;
+                 vertical-align:top; font-size:13px; }
+  td.k { color:#7d8590; width:180px; font-family:monospace; }
+  td.val { color:#e6edf3; font-family:monospace; }
+  td.long { font-size:11.5px; color:#f0d0a0; word-break:break-all; }
+  .foot { margin-top:18px; color:#7d8590; font-size:12px; }
+  code { color:#a5d6ff; }
+</style></head><body>
+  <div class="brand">Zircolite &middot; Sigma Detection Report</div>
+  <h1>Remote Thread Created By Scripting Or Office Process</h1>
+  <div class="badges"><span class="lvl HIGH">HIGH</span><span class="tag">attack.defense-evasion</span> <span class="tag">attack.privilege-escalation</span> <span class="tag">attack.t1055</span></div>
+  <div class="summary">
+    <div class="stat"><div class="n">88</div><div class="l">Matches</div></div>
+    <div class="stat"><div class="n" style="color:#79c0ff">EID 8</div><div class="l">Event ID</div></div>
+    <div class="stat"><div class="n" style="color:#d2a8ff;font-size:15px;padding-top:6px">T1055 Empire psinject</div><div class="l">Test log</div></div>
+  </div>
+  <div class="desc">Detects a script interpreter or Office application creating a remote thread in another process<br>(Sysmon EID 8 CreateRemoteThread). Interpreters such as powershell.exe/pwsh.exe, wscript,<br>cscript and mshta, and Office apps such as winword/excel, have no legitimate reason to inject<br>threads into other processes, so this is a strong process-injection signal (e.g. PowerShell<br>Empire reflectively injecting a PE and running it via CreateRemoteThread). The rule keys on the<br>source process and is deliberately target-agnostic rather than hardcoding a specific target.<br></div>
+  <div class="event"><div class="ev-hd">Matched event #1</div><table class="ev"><tr><td class="k">EventID</td><td class="val">8</td></tr><tr><td class="k">SourceImage</td><td class="val">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</td></tr><tr><td class="k">TargetImage</td><td class="val">C:\Windows\System32\notepad.exe</td></tr><tr><td class="k">StartModule</td><td class="val">-</td></tr><tr><td class="k">StartFunction</td><td class="val">-</td></tr><tr><td class="k">Hostname</td><td class="val">WORKSTATION5.theshire.local</td></tr><tr><td class="k">UtcTime</td><td class="val">2020-08-07 18:32:44.580</td></tr></table></div><div class="event"><div class="ev-hd">Matched event #2</div><table class="ev"><tr><td class="k">EventID</td><td class="val">8</td></tr><tr><td class="k">SourceImage</td><td class="val">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</td></tr><tr><td class="k">TargetImage</td><td class="val">C:\Windows\System32\notepad.exe</td></tr><tr><td class="k">StartModule</td><td class="val">-</td></tr><tr><td class="k">StartFunction</td><td class="val">-</td></tr><tr><td class="k">Hostname</td><td class="val">WORKSTATION5.theshire.local</td></tr><tr><td class="k">UtcTime</td><td class="val">2020-08-07 18:32:44.689</td></tr></table></div><div class="event"><div class="ev-hd">Matched event #3</div><table class="ev"><tr><td class="k">EventID</td><td class="val">8</td></tr><tr><td class="k">SourceImage</td><td class="val">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</td></tr><tr><td class="k">TargetImage</td><td class="val">C:\Windows\System32\notepad.exe</td></tr><tr><td class="k">StartModule</td><td class="val">-</td></tr><tr><td class="k">StartFunction</td><td class="val">-</td></tr><tr><td class="k">Hostname</td><td class="val">WORKSTATION5.theshire.local</td></tr><tr><td class="k">UtcTime</td><td class="val">2020-08-07 18:32:44.705</td></tr></table></div><div class="event"><div class="ev-hd">Matched event #4</div><table class="ev"><tr><td class="k">EventID</td><td class="val">8</td></tr><tr><td class="k">SourceImage</td><td class="val">C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe</td></tr><tr><td class="k">TargetImage</td><td class="val">C:\Windows\System32\notepad.exe</td></tr><tr><td class="k">StartModule</td><td class="val">-</td></tr><tr><td class="k">StartFunction</td><td class="val">-</td></tr><tr><td class="k">Hostname</td><td class="val">WORKSTATION5.theshire.local</td></tr><tr><td class="k">UtcTime</td><td class="val">2020-08-07 18:32:44.720</td></tr></table></div>
+  <div class="foot" style="color:#d2a8ff">+ 84 more matched event(s) not shown (total 88).</div>
+  <div class="foot">Rule ID <code>85a24c04-0505-46df-bc94-1236cab8312e</code> &middot;
+     Sigma source <code></code> &middot;
+     Source log <code>empire_psinject_PEinjection_2020-08-07143205.json</code></div>
+</body></html>

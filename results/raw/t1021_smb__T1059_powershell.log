@@ -1,0 +1,14 @@
+2026-07-17 21:41:59 INFO     [+] Loading ruleset(s)
+2026-07-17 21:41:59 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1021_002_smb_admin_share_service_pipe.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1021_002_smb_admin_share_service_pipe.yml[/][/link]
+2026-07-17 21:41:59 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 21:41:59 INFO     [+] 1 rules loaded
+2026-07-17 21:41:59 INFO     [+] Checking prerequisites
+2026-07-17 21:41:59 INFO     [+] Auto-detected log type: [cyan]windows_evtx[/] ([yellow]evtx[/]) - confidence: [green]high[/]
+2026-07-17 21:41:59 INFO     [+] Auto-detected timestamp field: [cyan]SystemTime[/]
+2026-07-17 21:41:59 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 21:41:59 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1059.001_powershell/exec_emotet_ps_4104.evtx][cyan]exec_emotet_ps_4104.evtx[/][/link]
+2026-07-17 21:41:59 INFO     [+] Processing events (streaming mode)
+2026-07-17 21:41:59 INFO     [+] Creating dynamic model
+2026-07-17 21:41:59 INFO     [+] Creating indexes
+2026-07-17 21:41:59 INFO     [+] Total events processed: [magenta]1[/]
+2026-07-17 21:41:59 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1059.001_powershell/exec_emotet_ps_4104.evtx][cyan]exec_emotet_ps_4104.evtx[/][/link] - [yellow]1[/] rules

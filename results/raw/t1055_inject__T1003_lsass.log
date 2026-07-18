@@ -1,0 +1,12 @@
+2026-07-17 21:42:00 INFO     [+] Loading ruleset(s)
+2026-07-17 21:42:00 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1055_create_remote_thread_from_scripting_process.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1055_create_remote_thread_from_scripting_process.yml[/][/link]
+2026-07-17 21:42:00 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 21:42:00 INFO     [+] 1 rules loaded
+2026-07-17 21:42:00 INFO     [+] Checking prerequisites
+2026-07-17 21:42:00 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 21:42:00 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1003.001_lsass_dump/psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json][cyan]psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json[/][/link]
+2026-07-17 21:42:00 INFO     [+] Processing events (streaming mode)
+2026-07-17 21:42:00 INFO     [+] Creating dynamic model
+2026-07-17 21:42:00 INFO     [+] Creating indexes
+2026-07-17 21:42:00 INFO     [+] Total events processed: [magenta]184[/]
+2026-07-17 21:42:00 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1003.001_lsass_dump/psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json][cyan]psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json[/][/link] - [yellow]1[/] rules

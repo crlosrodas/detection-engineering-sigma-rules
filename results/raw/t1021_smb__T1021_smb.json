@@ -1,0 +1,59 @@
+[{
+  "title": "Remote Service-Control Named Pipe Access Over SMB Admin Share",
+  "id": "76911ca2-7102-4436-a989-24a22ca82d23",
+  "description": "Detects network share object access (Security EID 5145) to a service-execution named pipe over\nthe IPC$ administrative share. Remote binds to RPC pipes such as svcctl (Service Control\nManager), atsvc (Task Scheduler) or psexecsvc are the hallmark of PsExec / SMBExec style\nlateral movement, where an attacker remotely creates and starts a service on the target to run\ncode. Because the logsource is service:security, EventID 5145 is asserted explicitly in the\nselection.\n",
+  "sigmafile": "",
+  "sigma": [
+    "SELECT * FROM logs WHERE EventID=5145 AND ShareName LIKE '%IPC$' ESCAPE '\\' AND (RelativeTargetName='svcctl' OR RelativeTargetName='atsvc' OR RelativeTargetName='psexecsvc' OR RelativeTargetName='paexec' OR RelativeTargetName='remcomsvc' OR RelativeTargetName='csexecsvc')"
+  ],
+  "rule_level": "high",
+  "tags": [
+    "attack.lateral-movement",
+    "attack.t1021.002"
+  ],
+  "count": 1,
+  "matches": [
+    {
+      "row_id": 552,
+      "AccessList": "%%4416\r\n\t\t\t\t%%4417\r\n\t\t\t\t",
+      "AccessMask": "0x3",
+      "AccessReason": "-",
+      "Category": "Detailed File Share",
+      "Channel": "security",
+      "ERROREVTUNRESOLVED": 1,
+      "EventID": 5145,
+      "EventReceivedTime": "2020-09-20 02:57:47",
+      "EventTime": "2020-09-20 02:57:47",
+      "EventType": "AUDIT_SUCCESS",
+      "ExecutionProcessID": 4,
+      "Hostname": "WORKSTATION6.theshire.local",
+      "IpAddress": "172.18.39.5",
+      "IpPort": "50504",
+      "Keywords": "-9214364837600034816",
+      "ObjectType": "File",
+      "Opcode": "Info",
+      "OpcodeValue": 0,
+      "OriginalLogfile": "empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json",
+      "ProviderGuid": "{54849625-5478-4994-A5BA-3E3B0328C30D}",
+      "RecordNumber": 644946,
+      "RelativeTargetName": "svcctl",
+      "Severity": "INFO",
+      "SeverityValue": 2,
+      "ShareName": "\\\\*\\IPC$",
+      "SourceModuleName": "eventlog",
+      "SourceModuleType": "im_msvistalog",
+      "SourceName": "Microsoft-Windows-Security-Auditing",
+      "SubjectDomainName": "THESHIRE",
+      "SubjectLogonId": "0x2074186",
+      "SubjectUserName": "pgustavo",
+      "SubjectUserSid": "S-1-5-21-4228717743-1032521047-1810997296-1104",
+      "Task": 12811,
+      "ThreadID": 6252,
+      "Version": "0",
+      "host": "wec.internal.cloudapp.net",
+      "port": 64545,
+      "tags": "['mordorDataset']",
+      "timestamp": "2020-09-20T06:57:47.862Z"
+    }
+  ]
+}]

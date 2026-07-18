@@ -1,0 +1,61 @@
+[{
+  "title": "LSASS Process Access With Memory-Dump Access Mask",
+  "id": "e8bea732-94d9-42d1-9edd-fbf4d4f27873",
+  "description": "Detects a process opening a handle to lsass.exe (Sysmon EID 10 ProcessAccess) with a\nGrantedAccess mask that grants the read/clone rights used to dump LSASS memory\n(e.g. PROCESS_VM_READ | PROCESS_QUERY_INFORMATION). Covers the well-known dump masks used by\ntools such as comsvcs.dll MiniDump, Mimikatz and ProcDump. GrantedAccess is compared\ncase-insensitively, so both upper- and lower-case hex representations are matched.\n",
+  "sigmafile": "",
+  "sigma": [
+    "SELECT * FROM logs WHERE EventID=10 AND (TargetImage LIKE '%\\\\lsass.exe' ESCAPE '\\' AND (GrantedAccess='0x1FFFFF' OR GrantedAccess='0x1F3FFF' OR GrantedAccess='0x1F1FFF' OR GrantedAccess='0x1010' OR GrantedAccess='0x1410' OR GrantedAccess='0x143A'))"
+  ],
+  "rule_level": "high",
+  "tags": [
+    "attack.credential-access",
+    "attack.t1003.001"
+  ],
+  "count": 1,
+  "matches": [
+    {
+      "row_id": 4869,
+      "AccountName": "SYSTEM",
+      "AccountType": "User",
+      "CallTrace": "C:\\windows\\SYSTEM32\\ntdll.dll+9c534|C:\\windows\\System32\\KERNELBASE.dll+305fe|C:\\windows\\assembly\\NativeImages_v4.0.30319_64\\System\\84043d42d91958316db595f1576a37d5\\System.ni.dll+381f60|C:\\windows\\assembly\\NativeImages_v4.0.30319_64\\System\\84043d42d91958316db595f1576a37d5\\System.ni.dll+2fa12e|C:\\windows\\assembly\\NativeImages_v4.0.30319_64\\System\\84043d42d91958316db595f1576a37d5\\System.ni.dll+2f956f|C:\\windows\\assembly\\NativeImages_v4.0.30319_64\\System\\84043d42d91958316db595f1576a37d5\\System.ni.dll+2f94a6|C:\\windows\\assembly\\NativeImages_v4.0.30319_64\\System\\84043d42d91958316db595f1576a37d5\\System.ni.dll+2f8620|UNKNOWN(00007FFF7B7F936F)",
+      "Category": "Process accessed (rule: ProcessAccess)",
+      "Channel": "Microsoft-Windows-Sysmon/Operational",
+      "Domain": "NT AUTHORITY",
+      "EventID": 10,
+      "EventReceivedTime": "2020-09-20 02:58:01",
+      "EventTime": "2020-09-20 02:57:54",
+      "EventType": "INFO",
+      "ExecutionProcessID": 9848,
+      "GrantedAccess": "0x1410",
+      "Hostname": "WORKSTATION5.theshire.local",
+      "Keywords": "-9223372036854775808",
+      "Opcode": "Info",
+      "OpcodeValue": 0,
+      "OriginalLogfile": "empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json",
+      "ProviderGuid": "{5770385F-C22A-43E0-BF4C-06F5698FFBD9}",
+      "RecordNumber": 1932187,
+      "RuleName": "-",
+      "Severity": "INFO",
+      "SeverityValue": 2,
+      "SourceImage": "C:\\WindowsAzure\\GuestAgent_2.7.41491.993_2020-09-17_150914\\CollectGuestLogs.exe",
+      "SourceModuleName": "eventlog",
+      "SourceModuleType": "im_msvistalog",
+      "SourceName": "Microsoft-Windows-Sysmon",
+      "SourceProcessGUID": "{b34bc01c-fd6b-5f66-d610-000000000400}",
+      "SourceProcessId": "7872",
+      "SourceThreadId": "3176",
+      "TargetImage": "C:\\windows\\system32\\lsass.exe",
+      "TargetProcessGUID": "{b34bc01c-7fad-5f63-0c00-000000000400}",
+      "TargetProcessId": "736",
+      "Task": 10,
+      "ThreadID": 7976,
+      "UserID": "S-1-5-18",
+      "UtcTime": "2020-09-20 06:57:54.852",
+      "Version": "3",
+      "host": "wec.internal.cloudapp.net",
+      "port": 64545,
+      "tags": "['mordorDataset']",
+      "timestamp": "2020-09-20T06:58:01.061Z"
+    }
+  ]
+}]

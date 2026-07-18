@@ -1,0 +1,12 @@
+2026-07-17 21:41:38 INFO     [+] Loading ruleset(s)
+2026-07-17 21:41:38 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1003_001_lsass_process_access_dump.yml[/][/link]
+2026-07-17 21:41:38 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 21:41:38 INFO     [+] 1 rules loaded
+2026-07-17 21:41:38 INFO     [+] Checking prerequisites
+2026-07-17 21:41:38 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 21:41:38 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1021.002_smb_admin_shares/empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json][cyan]empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json[/][/link]
+2026-07-17 21:41:38 INFO     [+] Processing events (streaming mode)
+2026-07-17 21:41:38 INFO     [+] Creating dynamic model
+2026-07-17 21:41:39 INFO     [+] Creating indexes
+2026-07-17 21:41:39 INFO     [+] Total events processed: [magenta]7,504[/]
+2026-07-17 21:41:39 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1021.002_smb_admin_shares/empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json][cyan]empire_smbexec_dcerpc_smb_svcctl_2020-09-20025716.json[/][/link] - [yellow]1[/] rules

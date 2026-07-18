@@ -1,0 +1,12 @@
+2026-07-17 21:41:51 INFO     [+] Loading ruleset(s)
+2026-07-17 21:41:51 INFO         [>] Converting Native Sigma to Zircolite ruleset : [link=file:///home/carlos/projects/detection-engineering-sigma-rules/rules/t1021_002_smb_admin_share_service_pipe.yml][cyan]/home/carlos/projects/detection-engineering-sigma-rules/rules/t1021_002_smb_admin_share_service_pipe.yml[/][/link]
+2026-07-17 21:41:51 INFO     [green]\[✓][/] Converted [cyan]1[/] rules
+2026-07-17 21:41:51 INFO     [+] 1 rules loaded
+2026-07-17 21:41:51 INFO     [+] Checking prerequisites
+2026-07-17 21:41:51 INFO     [+] Processing [yellow]1[/] file(s) separately in streaming mode
+2026-07-17 21:41:51 INFO     [+] Processing file: [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json][cyan]empire_psinject_PEinjection_2020-08-07143205.json[/][/link]
+2026-07-17 21:41:51 INFO     [+] Processing events (streaming mode)
+2026-07-17 21:41:52 INFO     [+] Creating dynamic model
+2026-07-17 21:41:52 INFO     [+] Creating indexes
+2026-07-17 21:41:52 INFO     [+] Total events processed: [magenta]5,898[/]
+2026-07-17 21:41:52 INFO     [+] Executing ruleset for [link=file:///home/carlos/projects/detection-engineering-sigma-rules/logs/T1055_process_injection/empire_psinject_PEinjection_2020-08-07143205.json][cyan]empire_psinject_PEinjection_2020-08-07143205.json[/][/link] - [yellow]1[/] rules

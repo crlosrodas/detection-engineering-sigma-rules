@@ -1,0 +1,61 @@
+[{
+  "title": "LSASS Process Access With Memory-Dump Access Mask",
+  "id": "e8bea732-94d9-42d1-9edd-fbf4d4f27873",
+  "description": "Detects a process opening a handle to lsass.exe (Sysmon EID 10 ProcessAccess) with a\nGrantedAccess mask that grants the read/clone rights used to dump LSASS memory\n(e.g. PROCESS_VM_READ | PROCESS_QUERY_INFORMATION). Covers the well-known dump masks used by\ntools such as comsvcs.dll MiniDump, Mimikatz and ProcDump. GrantedAccess is compared\ncase-insensitively, so both upper- and lower-case hex representations are matched.\n",
+  "sigmafile": "",
+  "sigma": [
+    "SELECT * FROM logs WHERE EventID=10 AND (TargetImage LIKE '%\\\\lsass.exe' ESCAPE '\\' AND (GrantedAccess='0x1FFFFF' OR GrantedAccess='0x1F3FFF' OR GrantedAccess='0x1F1FFF' OR GrantedAccess='0x1010' OR GrantedAccess='0x1410' OR GrantedAccess='0x143A'))"
+  ],
+  "rule_level": "high",
+  "tags": [
+    "attack.credential-access",
+    "attack.t1003.001"
+  ],
+  "count": 2,
+  "matches": [
+    {
+      "row_id": 74,
+      "CallTrace": "C:\\windows\\SYSTEM32\\ntdll.dll+9c584|C:\\windows\\SYSTEM32\\ntdll.dll+74bf7|C:\\windows\\System32\\KERNEL32.DLL+1c258|C:\\windows\\System32\\KERNEL32.DLL+23278|C:\\windows\\SYSTEM32\\dbgcore.DLL+9447|C:\\windows\\SYSTEM32\\dbgcore.DLL+16185|C:\\windows\\SYSTEM32\\dbgcore.DLL+100a6|C:\\windows\\SYSTEM32\\dbgcore.DLL+613f|C:\\windows\\SYSTEM32\\dbgcore.DLL+6bbc|C:\\windows\\System32\\comsvcs.dll+3c684|C:\\Windows\\System32\\rundll32.exe+3bcf|C:\\Windows\\System32\\rundll32.exe+62d9|C:\\windows\\System32\\KERNEL32.DLL+17c24|C:\\windows\\SYSTEM32\\ntdll.dll+6cea1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational",
+      "EventID": 10,
+      "GrantedAccess": "0x1fffff",
+      "Hostname": "WORKSTATION5",
+      "Message": "Process accessed:\r\nRuleName: -\r\nUtcTime: 2020-10-18 23:50:05.994\r\nSourceProcessGUID: {39e4a257-d4ad-5f8c-3303-000000000700}\r\nSourceProcessId: 4824\r\nSourceThreadId: 4372\r\nSourceImage: C:\\Windows\\System32\\rundll32.exe\r\nTargetProcessGUID: {39e4a257-f131-5f8b-0c00-000000000700}\r\nTargetProcessId: 756\r\nTargetImage: C:\\windows\\system32\\lsass.exe\r\nGrantedAccess: 0x1FFFFF\r\nCallTrace: C:\\windows\\SYSTEM32\\ntdll.dll+9c584|C:\\windows\\SYSTEM32\\ntdll.dll+74bf7|C:\\windows\\System32\\KERNEL32.DLL+1c258|C:\\windows\\System32\\KERNEL32.DLL+23278|C:\\windows\\SYSTEM32\\dbgcore.DLL+9447|C:\\windows\\SYSTEM32\\dbgcore.DLL+16185|C:\\windows\\SYSTEM32\\dbgcore.DLL+100a6|C:\\windows\\SYSTEM32\\dbgcore.DLL+613f|C:\\windows\\SYSTEM32\\dbgcore.DLL+6bbc|C:\\windows\\System32\\comsvcs.dll+3c684|C:\\Windows\\System32\\rundll32.exe+3bcf|C:\\Windows\\System32\\rundll32.exe+62d9|C:\\windows\\System32\\KERNEL32.DLL+17c24|C:\\windows\\SYSTEM32\\ntdll.dll+6cea1",
+      "OriginalLogfile": "psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json",
+      "RuleName": "-",
+      "SourceImage": "C:\\Windows\\System32\\rundll32.exe",
+      "SourceName": "Microsoft-Windows-Sysmon",
+      "SourceProcessGUID": "{39e4a257-d4ad-5f8c-3303-000000000700}",
+      "SourceProcessId": "4824",
+      "SourceThreadId": "4372",
+      "TargetImage": "C:\\windows\\system32\\lsass.exe",
+      "TargetProcessGUID": "{39e4a257-f131-5f8b-0c00-000000000700}",
+      "TargetProcessId": "756",
+      "Task": "10",
+      "TimeCreated": "2020-10-18 07:50:06.025",
+      "UtcTime": "2020-10-18 23:50:05.994"
+    },
+    {
+      "row_id": 76,
+      "CallTrace": "C:\\windows\\SYSTEM32\\ntdll.dll+9c584|C:\\windows\\System32\\KERNELBASE.dll+305fe|C:\\windows\\System32\\comsvcs.dll+3c56f|C:\\Windows\\System32\\rundll32.exe+3bcf|C:\\Windows\\System32\\rundll32.exe+62d9|C:\\windows\\System32\\KERNEL32.DLL+17c24|C:\\windows\\SYSTEM32\\ntdll.dll+6cea1",
+      "Channel": "Microsoft-Windows-Sysmon/Operational",
+      "EventID": 10,
+      "GrantedAccess": "0x1410",
+      "Hostname": "WORKSTATION5",
+      "Message": "Process accessed:\r\nRuleName: -\r\nUtcTime: 2020-10-18 23:50:05.963\r\nSourceProcessGUID: {39e4a257-d4ad-5f8c-3303-000000000700}\r\nSourceProcessId: 4824\r\nSourceThreadId: 4372\r\nSourceImage: C:\\Windows\\System32\\rundll32.exe\r\nTargetProcessGUID: {39e4a257-f131-5f8b-0c00-000000000700}\r\nTargetProcessId: 756\r\nTargetImage: C:\\windows\\system32\\lsass.exe\r\nGrantedAccess: 0x1410\r\nCallTrace: C:\\windows\\SYSTEM32\\ntdll.dll+9c584|C:\\windows\\System32\\KERNELBASE.dll+305fe|C:\\windows\\System32\\comsvcs.dll+3c56f|C:\\Windows\\System32\\rundll32.exe+3bcf|C:\\Windows\\System32\\rundll32.exe+62d9|C:\\windows\\System32\\KERNEL32.DLL+17c24|C:\\windows\\SYSTEM32\\ntdll.dll+6cea1",
+      "OriginalLogfile": "psh_lsass_memory_dump_comsvcs_2020-10-18T19500924.json",
+      "RuleName": "-",
+      "SourceImage": "C:\\Windows\\System32\\rundll32.exe",
+      "SourceName": "Microsoft-Windows-Sysmon",
+      "SourceProcessGUID": "{39e4a257-d4ad-5f8c-3303-000000000700}",
+      "SourceProcessId": "4824",
+      "SourceThreadId": "4372",
+      "TargetImage": "C:\\windows\\system32\\lsass.exe",
+      "TargetProcessGUID": "{39e4a257-f131-5f8b-0c00-000000000700}",
+      "TargetProcessId": "756",
+      "Task": "10",
+      "TimeCreated": "2020-10-18 07:50:06.001",
+      "UtcTime": "2020-10-18 23:50:05.963"
+    }
+  ]
+}]
